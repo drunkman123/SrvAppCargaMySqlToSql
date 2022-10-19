@@ -5,8 +5,8 @@ Trata-se de um serviço para fazer Select em banco de dados MySql e depois um In
 ### Tecnologias utilizadas
 C# .NET 6, SQL, MySql
 ### Desafios e Futuro
-Este projeto nasceu da necessidade de transportar dados de um banco legado(ainda em uso) MySql para o novo em Sql.
-A maior dificuldade foi para acertar a parte das datas, visto que no MySql o banco não foi modelado corretamente possui diversas datas que ficam inválidas no Sql. A solução foi fazer no select do MySql o tratamento com CASE e assim evitar datas menores que 1753-01-01.
+Este projeto nasceu da necessidade de transportar dados de um banco legado(ainda em uso) MySql para o novo em Sql.<br />
+A maior dificuldade foi para acertar a parte das datas, visto que no MySql o banco não foi modelado corretamente possui diversas datas que ficam inválidas no Sql. A solução foi fazer no select do MySql o tratamento com CASE e assim evitar datas menores que 1753-01-01.<br />
 ```
 var sql = @"SELECT 
 			 	                    Codigo,
@@ -38,12 +38,14 @@ var sql = @"SELECT
 				                    FROM " + _Folha2MySql + @" WHERE Codigo > @ultimo_id LIMIT 1000";
 ```
 
+Foi criado um método genérico GetLastCod para evitar repetição de código, no resto não deu pois sao diversos campos diferentes com tipos diferentes.
+
 ### Funcionamento
-Basta chamar o método Start() na controller que entrará em loop eterno, mesmo com erros(que estão sendo salvos no servidor), o programa só irá parar caso a máquina onde esteja hospedada, seja desligada ou o serviço parado.
--Primeiramente o programa consulta qual o último Codigo (primary key) no banco Sql.
--Em posse desse código, faz um select com where apenas para os registros com codigo acima do último no mysql
--pega esses dados, faz um tratamento (para trocar strings vazias) por nulos
--faz um insert com esses dados no sql.
--grava o horário de atualização e pausa antes de ir para a próxima folha, e fica assim no loop.
-Também foi feito um método para salvar a data da última atualização de cada Folha.
+Basta chamar o método Start() na controller que entrará em loop eterno, mesmo com erros(que estão sendo salvos no servidor), o programa só irá parar caso a máquina onde esteja hospedada, seja desligada ou o serviço parado.<br />
+-Primeiramente o programa consulta qual o último Codigo (primary key) no banco Sql.<br />
+-Em posse desse código, faz um select com where apenas para os registros com codigo acima do último no mysql<br />
+-pega esses dados, faz um tratamento (para trocar strings vazias) por nulos<br />
+-faz um insert com esses dados no sql.<br />
+-grava o horário de atualização e pausa antes de ir para a próxima folha, e fica assim no loop.<br />
+Também foi feito um método para salvar a data da última atualização de cada Folha.<br />
 
