@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace SrvAppCargasSisbol.Data.Models
 {
-    public class Folha2
+    public class Folha10
     {
         private string? _obs;
-        private string? _SubUnidade;
-        private string? _Destacamento;
         private string? _cpf;
         private string? _Assunto;
-        private string? _Hora;
         private string? _NumOrd;
+        private string? _Hora;
         private int? _codigo_geral;
+        private string? _Historico;
         private int? _id_log_cadmanual;
 
         public int Codigo { get; set; }
@@ -46,33 +40,21 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _Assunto = value?.Replace("'", " "); }
             }
         }
-        public string? Unidade { get; set; }
-        public string? SubUnidade
-        {
-            get => _SubUnidade; set
-            {
-                _SubUnidade = value?.Replace("'", " ");
-            }
-        }
-        public int? dest_codopm { get; set; }
-        public string? Destacamento
-        {
-            get => _Destacamento; set
-            {
-                _Destacamento = value?.Replace("'", " ");
-            }
-        }
-        public DateTime? DataIncEEf { get; set; }
         public string? CodigoBol { get; set; }
-        
-        public string? Obs
+        public string? Historico
         {
-            get => _obs; set
+            get => _Historico;
+            set
             {
-                _obs = value?.Replace("'", " ");
+                if (value == "")
+                {
+                    _Historico = null;
+                }
+                else { _Historico = value?.Replace("'", "`"); }
             }
         }
         public string? Lancador { get; set; }
+        public int? AjdSecRE { get; set; }
         public DateTime? DataDig { get; set; }
         public string? Hora
         {
@@ -100,8 +82,19 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _codigo_geral = value; }
             }
         }
-        public string? conveniencia { get; set; }
         public int? id_desc { get; set; }
+        public string? obs
+        {
+            get => _obs;
+            set
+            {
+                if (value == "")
+                {
+                    _obs = null;
+                }
+                else { _obs = value?.Replace("'", " "); }
+            }
+        }
         public string? NumOrd
         {
             get => _NumOrd;
@@ -116,7 +109,6 @@ namespace SrvAppCargasSisbol.Data.Models
         }
         public int? cod_opm { get; set; }
         public int? tipo_nota { get; set; }
-        public int? situacao { get; set; }
         public DateTime? data_lancamento { get; set; }
         public int? id_log_cadmanual
         {

@@ -7,21 +7,25 @@ using System.Threading.Tasks;
 
 namespace SrvAppCargasSisbol.Data.Models
 {
-    public class Folha2
+    public class Folha5Verso
     {
         private string? _obs;
-        private string? _SubUnidade;
-        private string? _Destacamento;
         private string? _cpf;
+        private string? _Motivo;
+        private string? _Parecer;
         private string? _Assunto;
-        private string? _Hora;
+        private string? _Especie5;
+        private string? _Junta;
         private string? _NumOrd;
+        private string? _Hora;
+        private int? _ano;
         private int? _codigo_geral;
         private int? _id_log_cadmanual;
 
+
         public int Codigo { get; set; }
         public int? Impresso { get; set; }
-        public int? RE { get; set; }
+        public Single? RE { get; set; }
         public string? cpf
         {
             get => _cpf;
@@ -46,32 +50,58 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _Assunto = value?.Replace("'", " "); }
             }
         }
-        public string? Unidade { get; set; }
-        public string? SubUnidade
+        public string? Especie5
         {
-            get => _SubUnidade; set
+            get => _Especie5;
+            set
             {
-                _SubUnidade = value?.Replace("'", " ");
+                if (value == "")
+                {
+                    _Especie5 = null;
+                }
+                else { _Especie5 = value?.Replace("'", " "); }
             }
         }
-        public int? dest_codopm { get; set; }
-        public string? Destacamento
+
+        public string? Junta
         {
-            get => _Destacamento; set
+            get => _Junta;
+            set
             {
-                _Destacamento = value?.Replace("'", " ");
+                if (value == "")
+                {
+                    _Junta = null;
+                }
+                else { _Junta = value?.Replace("'", " "); }
             }
         }
-        public DateTime? DataIncEEf { get; set; }
+        public string? Motivo
+        {
+            get => _Motivo; 
+            set
+            {
+                if(value == "")
+                {
+                    _Motivo = null;
+                }
+                else { _Motivo = value?.Replace("'", " "); }
+            }
+        }
+        public int? DiasAfast { get; set; }
+        public DateTime? DataIniAfast { get; set; }
+        public string? Parecer
+        {
+            get => _Parecer;
+            set
+            {
+                if (value == "")
+                {
+                    _Parecer = null;
+                }
+                else { _Parecer = value?.Replace("'", " "); }
+            }
+        }
         public string? CodigoBol { get; set; }
-        
-        public string? Obs
-        {
-            get => _obs; set
-            {
-                _obs = value?.Replace("'", " ");
-            }
-        }
         public string? Lancador { get; set; }
         public DateTime? DataDig { get; set; }
         public string? Hora
@@ -88,6 +118,7 @@ namespace SrvAppCargasSisbol.Data.Models
         }
         public int? Assinado { get; set; }
         public int? ReAssinante { get; set; }
+        public int? id_desc { get; set; }
         public int? codigo_geral
         {
             get => _codigo_geral;
@@ -100,8 +131,31 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _codigo_geral = value; }
             }
         }
-        public string? conveniencia { get; set; }
-        public int? id_desc { get; set; }
+        public int? ano
+        {
+            get => _ano;
+            set
+            {
+                if (value == 0)
+                {
+                    _ano = null;
+                }
+                else { _ano = value; }
+            }
+        }
+        public string? obs
+        {
+            get => _obs;
+            set
+            {
+                if (value == "")
+                {
+                    _obs = null;
+                }
+                else { _obs = value?.Replace("'", " "); }
+            }
+        }
+        public DateTime? DataTermAfast { get; set; }
         public string? NumOrd
         {
             get => _NumOrd;
@@ -114,9 +168,8 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _NumOrd = value?.Replace("'", " "); }
             }
         }
-        public int? cod_opm { get; set; }
+        public int? cod_opm { get; set; }      
         public int? tipo_nota { get; set; }
-        public int? situacao { get; set; }
         public DateTime? data_lancamento { get; set; }
         public int? id_log_cadmanual
         {

@@ -44,7 +44,6 @@ namespace SrvAppCargasSisbol.Controllers
     public class CargasSisbolController : Controller
     {
         private IHostEnvironment _hostingEnvironment;
-        private int re;
         private readonly CargasSisbolRepository _cargasSisbolRepo;
         public CargasSisbolController(IHostEnvironment hostingEnvironment, IConfiguration Configuration)
         {
@@ -66,17 +65,29 @@ namespace SrvAppCargasSisbol.Controllers
                     _cargasSisbolRepo.CargaFolha3();
                     new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
                     _cargasSisbolRepo.CargaFolha4();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha5Frente();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha5Verso();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha6();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha8();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha9();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha10();
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(1));
+                    _cargasSisbolRepo.CargaFolha11Frente();
                     _cargasSisbolRepo.SaveUltimaAtu();
-                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(17));
+                    new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(11));
                 }
                 catch (Exception ex)
                 {
                     _cargasSisbolRepo.GetErro(ex.ToString());
                     new ManualResetEvent(false).WaitOne(TimeSpan.FromMinutes(5));
-
                 }
-            }
-            
+            }            
         }
     }
 }

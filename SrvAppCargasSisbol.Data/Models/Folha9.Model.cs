@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 
 namespace SrvAppCargasSisbol.Data.Models
 {
-    public class Folha2
+    public class Folha9
     {
         private string? _obs;
-        private string? _SubUnidade;
-        private string? _Destacamento;
         private string? _cpf;
         private string? _Assunto;
-        private string? _Hora;
         private string? _NumOrd;
+        private string? _Hora;
         private int? _codigo_geral;
         private int? _id_log_cadmanual;
+        private int? _AjdSecRE;
+        private string? _Historico;
+        private string? _OPM;
+        private string? _TempoPuni;
+        private string? _Retificacao;
 
         public int Codigo { get; set; }
         public int? Impresso { get; set; }
@@ -46,33 +44,45 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _Assunto = value?.Replace("'", " "); }
             }
         }
-        public string? Unidade { get; set; }
-        public string? SubUnidade
+        public int? TipoPuni { get; set; }
+        public string? TempoPuni
         {
-            get => _SubUnidade; set
+            get => _TempoPuni;
+            set
             {
-                _SubUnidade = value?.Replace("'", " ");
+                if (value == "")
+                {
+                    _TempoPuni = null;
+                }
+                else { _TempoPuni = value?.Trim(); }
             }
         }
-        public int? dest_codopm { get; set; }
-        public string? Destacamento
-        {
-            get => _Destacamento; set
-            {
-                _Destacamento = value?.Replace("'", " ");
-            }
-        }
-        public DateTime? DataIncEEf { get; set; }
         public string? CodigoBol { get; set; }
-        
-        public string? Obs
+        public string? Historico
         {
-            get => _obs; set
+            get => _Historico;
+            set
             {
-                _obs = value?.Replace("'", " ");
+                if (value == "")
+                {
+                    _Historico = null;
+                }
+                else { _Historico = value?.Replace("'", "`"); }
             }
         }
         public string? Lancador { get; set; }
+        public int? AjdSecRE
+        {
+            get => _AjdSecRE;
+            set
+            {
+                if (value == 0)
+                {
+                    _AjdSecRE = null;
+                }
+                else { _AjdSecRE = value; }
+            }
+        }
         public DateTime? DataDig { get; set; }
         public string? Hora
         {
@@ -88,6 +98,33 @@ namespace SrvAppCargasSisbol.Data.Models
         }
         public int? Assinado { get; set; }
         public int? ReAssinante { get; set; }
+        public string? OPM
+        {
+            get => _OPM;
+            set
+            {
+                if (value == "")
+                {
+                    _OPM = null;
+                }
+                else { _OPM = value; }
+            }
+        }        
+        public string? Retificacao
+        {
+            get => _Retificacao;
+            set
+            {
+                if (value == "")
+                {
+                    _Retificacao = null;
+                }
+                else { _Retificacao = value; }
+            }
+        }
+        public DateTime? DataPunicao { get; set; }
+
+        public int? id_desc { get; set; }
         public int? codigo_geral
         {
             get => _codigo_geral;
@@ -100,8 +137,18 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _codigo_geral = value; }
             }
         }
-        public string? conveniencia { get; set; }
-        public int? id_desc { get; set; }
+        public string? obs
+        {
+            get => _obs;
+            set
+            {
+                if (value == "")
+                {
+                    _obs = null;
+                }
+                else { _obs = value?.Replace("'", " "); }
+            }
+        }
         public string? NumOrd
         {
             get => _NumOrd;
@@ -114,9 +161,8 @@ namespace SrvAppCargasSisbol.Data.Models
                 else { _NumOrd = value?.Replace("'", " "); }
             }
         }
-        public int? cod_opm { get; set; }
+        public int? cod_opm { get; set; }      
         public int? tipo_nota { get; set; }
-        public int? situacao { get; set; }
         public DateTime? data_lancamento { get; set; }
         public int? id_log_cadmanual
         {
